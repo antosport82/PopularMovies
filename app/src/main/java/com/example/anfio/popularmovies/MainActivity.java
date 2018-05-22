@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.anfio.popularmovies.utilities.Constants;
 import com.example.anfio.popularmovies.utilities.MovieJsonUtils;
 import com.example.anfio.popularmovies.utilities.NetworkUtils;
 
@@ -32,14 +33,12 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler {
 
     // declare API_KEY
-    private static final String API_KEY = "YOUR_API_KEY_HERE";
+    private static final String API_KEY = Constants.API_KEY;
     @BindView(R.id.rv_movies) RecyclerView mRecyclerView;
     @BindView(R.id.pb_loading_indicator) ProgressBar mProgressBar;
     @BindView(R.id.tv_error_message) TextView mErrorMessage;
     private MovieAdapter mMovieAdapter;
     // The two urls to use at this stage
-    private static final String STRING_URL_POPULAR = "http://api.themoviedb.org/3/movie/popular?api_key=" + API_KEY;
-    private static final String STRING_URL_TOP_RATED = "http://api.themoviedb.org/3/movie/top_rated?api_key=" + API_KEY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +72,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         // assign the value to a string variable
         String urlToExecute = "";
         if (orderBy.equals(getString(R.string.settings_order_by_most_popular_value))) {
-            urlToExecute = STRING_URL_POPULAR;
+            urlToExecute = Constants.STRING_URL_POPULAR;
         } else if (orderBy.equals(getString(R.string.settings_order_by_top_rated_value))) {
-            urlToExecute = STRING_URL_TOP_RATED;
+            urlToExecute = Constants.STRING_URL_TOP_RATED;
         }
         new FetchMovieTask().execute(urlToExecute);
     }
